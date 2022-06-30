@@ -26,8 +26,9 @@ files = os.listdir('data/btc')
 # DataFrame 'df' 
 df = pd.DataFrame([])
 for file in files: 
-    tmp_df = pd.read_csv('data/btc/' + file)
-    df = df.append(tmp_df)
+    if file != '.ipynb_checkpoints':        
+        tmp_df = pd.read_csv('data/btc/' + file)
+        df = df.append(tmp_df)
 
 # re-index the DataFrame to avoid having duplicates in the index
 df.index = pd.RangeIndex(len(df.index))
@@ -38,7 +39,6 @@ df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
 # finally we plot the time series for a specific exchange: BTC vs EUR
 sns.set(rc={'figure.figsize':(13, 7)})
 plot = sns.lineplot(x='date', y='current_price', data=df[df['index']=='eur'])
-plot.get_figure().autofmt_xdate() 
 plot.set(title='Bitcoin Price Chart (BTC/EUR)', 
          xlabel='', 
          ylabel='Price in Euro')

@@ -12,7 +12,7 @@ import requests
 import seaborn as sns
 import datetime
 
-# initalisation of parameters
+# initalisation of parameters 
 end_date = datetime.date.today()   # <-- today's date
 days_back = 28   # <-- lookback window
 
@@ -45,5 +45,4 @@ df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
 
 # finally we plot the time series for a specific exchange: BTC vs EUR
 sns.set(rc={'figure.figsize':(13, 7)})
-sns.lineplot(x='date', y='current_price', data=df[df['index']=='eur']) \
-    .get_figure().autofmt_xdate()   # automatic dates formatting
+sns.lineplot(x='date', y='current_price', data=df[df['index']=='eur'])
